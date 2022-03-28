@@ -34,6 +34,12 @@ class RobinHoodTest {
         assertEquals(exp,act);
     }
 
+    @RepeatedTest(1000)
+    void addSmallSize() {
+        add(10);
+        add(20);
+    }
+
     @ParameterizedTest
     @ValueSource(ints = { 100, 500, 1000, 2000, 10000, 1000000, 1000000 })
     void addAllSizes(int size) {
@@ -42,7 +48,7 @@ class RobinHoodTest {
 
     @RepeatedTest(1000)
     void addRandomCheck() {
-        add(100);
+        add(500);
         add(10000);
     }
 
@@ -61,8 +67,7 @@ class RobinHoodTest {
         }
 
         for (var i: list) {
-            assertEquals(test.remove(i), hashmap.remove(i));
-            assertEquals(test.size(), hashmap.size());
+            assertEquals(hashmap.get(i), test.get(i)); test.remove(i); hashmap.remove(i);
         }
     }
 
